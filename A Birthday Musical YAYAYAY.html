@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#081811">
+<meta name="description" content="An intimate birthday musical, made for one very special star.">
+<title>A Birthday Musical — Royal Premiere</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#06110d;--forest:#0d291d;--evergreen:#104530;--velvet:#17603f;
+    --gold:#c7a05b;--bright-gold:#f1d99a;--deep-gold:#84602c;
+    --cream:#f5eedc;--paper:#f3ecd9;--ink:#24392b;--muted:#65715e;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --caps:'Cinzel',Georgia,serif;
+    --body:'Libre Baskerville',Georgia,serif;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;min-height:100vh;background:var(--night);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased}
+  body.locked{overflow:hidden}
+  button{font:inherit;cursor:pointer}
+  button:focus-visible,summary:focus-visible{outline:3px solid #edd187;outline-offset:5px}
+  #title:focus{outline:none}
+  ::selection{background:#c8a361;color:#082117}
+
+  /* The building around the stage: an understated gilded proscenium. */
+  .theatre{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;
+    background:radial-gradient(ellipse 65% 51% at 50% 13%,#244c35 0%,#112d20 45%,#081911 85%,#050e0a 100%)}
+  .theatre::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+    background:repeating-linear-gradient(90deg,transparent 0 15px,#ffffff04 16px 18px,transparent 20px 42px),
+               radial-gradient(ellipse at 50% 10%,#ffdc8317,transparent 52%)}
+  .theatre::after{content:"";position:absolute;inset:0;z-index:9;pointer-events:none;
+    box-shadow:inset 0 0 120px 25px #0009}
+  .architecture{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .architecture__side{position:absolute;top:0;bottom:0;width:clamp(18px,7vw,112px);
+    background:linear-gradient(90deg,#070f0b,#15301f 23%,#25452a 27%,#111d14 34%,#0a110c 63%,#1e3927 70%,#08130e);
+    box-shadow:inset 0 0 0 1px #c4a26165,0 0 0 5px #060e09,0 0 28px #000b}
+  .architecture__side.left{left:0;border-right:2px solid #a48049}
+  .architecture__side.right{right:0;transform:scaleX(-1);border-right:2px solid #a48049}
+  .architecture__arch{position:absolute;left:5.6%;right:5.6%;top:-120px;height:270px;
+    border:2px solid #ad844c;border-bottom:0;border-radius:50% 50% 0 0 / 100% 100% 0 0;
+    box-shadow:0 0 0 6px #0b1b12,0 0 0 7px #927442,0 0 0 15px #09160f,0 0 0 16px #967341,0 25px 70px #0009}
+  .architecture__arch::before{content:"";position:absolute;inset:10px;border:1px solid #d4ae6b80;
+    border-radius:inherit;border-bottom:0}
+  .house-lights{position:absolute;inset:-100px 0 auto;height:810px;pointer-events:none;
+    background:radial-gradient(ellipse 48% 45% at 50% 27%,#f3d08e2b 0,transparent 76%);opacity:.5;
+    transition:opacity 2s ease}
+  .theatre.lit .house-lights{opacity:1}
+  .theatre-header{position:relative;z-index:1;max-width:850px;margin:auto;padding:62px 20px 24px;
+    color:#e5c992;text-align:center}
+  .theatre-header__eyebrow{margin:0;font-family:var(--caps);font-weight:500;letter-spacing:.35em;
+    font-size:clamp(.59rem,1.1vw,.7rem);text-transform:uppercase}
+  .theatre-header__line{display:flex;align-items:center;justify-content:center;gap:14px;
+    margin:16px auto 0;width:min(250px,74vw);color:#e8cc90}
+  .theatre-header__line::before,.theatre-header__line::after{content:"";flex:1;height:1px;
+    background:linear-gradient(90deg,transparent,#a7864f)}
+  .theatre-header__line::after{transform:scaleX(-1)}
+  .theatre-header__line span{font-size:14px;line-height:1}
+  .program-wrap{position:relative;z-index:2;max-width:820px;margin:0 auto;
+    padding:19px 42px 95px}
+  .playbill{position:relative;padding:72px clamp(27px,7vw,82px) 65px;
+    background:radial-gradient(ellipse at 50% 18%,#fffaf0 0%,#f6efdf 55%,#eee3cc 100%);
+    border:1px solid #c39b57;box-shadow:0 8px 0 #0b1c12,0 9px 0 #9c793f,0 18px 70px #000b,0 35px 110px #0009}
+  .playbill::before,.playbill::after{content:"";position:absolute;pointer-events:none}
+  .playbill::before{inset:10px;border:2px solid #b28b4b;opacity:.84}
+  .playbill::after{inset:17px;border:1px solid #cbb27d;opacity:.9}
+  .paper-grain{position:absolute;inset:19px;z-index:0;pointer-events:none;opacity:.21;
+    background:repeating-linear-gradient(0deg,transparent 0 3px,#976c3009 4px 5px),
+              repeating-linear-gradient(90deg,transparent 0 4px,#92663008 5px 7px)}
+  .playbill > :not(.paper-grain):not(.ornament-corner){position:relative;z-index:1}
+  .ornament-corner{position:absolute;width:65px;height:65px;z-index:1;pointer-events:none;color:#a58349}
+  .ornament-corner.tl{top:18px;left:18px}.ornament-corner.tr{top:18px;right:18px;transform:scaleX(-1)}
+  .ornament-corner.bl{bottom:18px;left:18px;transform:scaleY(-1)}
+  .ornament-corner.br{bottom:18px;right:18px;transform:scale(-1)}
+  .playbill__eyebrow{text-align:center;text-transform:uppercase;letter-spacing:.2em;
+    color:#7f673e;font-family:var(--caps);font-size:clamp(.63rem,1.7vw,.74rem);margin:0 auto 13px;line-height:1.9}
+  .seal{display:flex;align-items:center;justify-content:center;margin:0 auto 22px;
+    height:106px;width:106px;border-radius:50%;border:1px solid #b18b4c;
+    box-shadow:0 0 0 5px #f4ebd5,0 0 0 6px #c1a56d,0 4px 20px #6d522e20;
+    background:radial-gradient(circle,#fff9ea,#e8dabb)}
+  .seal svg{width:64px;height:64px;filter:drop-shadow(0 2px 1px #6f4b261e)}
+  .name{font-family:var(--serif);font-size:clamp(3.5rem,8.9vw,6.55rem);font-weight:500;
+    letter-spacing:-.045em;color:#153d2c;text-align:center;line-height:.97;margin:3px -12px 13px;
+    text-wrap:balance;overflow-wrap:break-word}
+  .subtitle{font-family:var(--caps);font-size:clamp(.75rem,1.9vw,.92rem);font-weight:500;
+    color:#8b682e;letter-spacing:.16em;text-align:center;line-height:1.9;margin:0 0 19px;text-transform:uppercase}
+  .spark-divider{display:flex;justify-content:center;align-items:center;gap:17px;
+    margin:27px auto 32px;color:#ae8744}
+  .spark-divider .line{height:1px;width:min(130px,30%);background:linear-gradient(90deg,transparent,#bc995d)}
+  .spark-divider .line:last-child{transform:scaleX(-1)}
+  .spark-divider .flourish{font-size:20px;line-height:1;white-space:nowrap}
+  .section-title{font-family:var(--caps);text-align:center;font-weight:500;letter-spacing:.17em;
+    color:#24543b;font-size:clamp(.91rem,2.4vw,1.1rem);margin:0 0 22px;text-transform:uppercase}
+  .cast{list-style:none;margin:0;padding:0}
+  .cast li{display:flex;align-items:center;gap:9px;margin:13px 0;font-size:.78rem;line-height:1.8}
+  .cast-icon{flex:0 0 32px;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center}
+  .cast-icon svg,.cast-icon img{display:block;width:100%;height:100%;object-fit:contain}
+  .cast .cast-name{font-weight:700;color:#273c2b}
+  .cast .cast-dots{flex:1;min-width:9px;border-bottom:1px dotted #9a874f;transform:translateY(-3px)}
+  .cast .cast-role{font-style:italic;text-align:right;color:#667060}
+  .interlude{font-family:var(--serif);font-size:clamp(1.22rem,3vw,1.5rem);font-style:italic;
+    color:#66745f;text-align:center;line-height:1.38;margin:0;text-wrap:balance}
+  .program-list details{border-top:1px solid #bfb08b;padding:0}
+  .program-list details:last-child{border-bottom:1px solid #bfb08b}
+  .program-list summary{list-style:none;position:relative;cursor:pointer;padding:18px 35px 18px 0}
+  .program-list summary::-webkit-details-marker{display:none}
+  .program-list summary::after{content:"+";position:absolute;right:0;top:17px;font-size:27px;
+    line-height:1;font-family:var(--serif);color:#976b2e;transition:transform .25s ease}
+  .program-list details[open] summary::after{content:"−"}
+  .act-title{display:block;font-family:var(--serif);font-size:clamp(1.47rem,3.9vw,1.85rem);font-weight:600;
+    line-height:1.1;color:#244732}
+  .act-tag{display:block;margin-top:7px;font-family:var(--serif);font-style:italic;color:#7a806c;
+    font-size:1.08rem;line-height:1.2}
+  .act-body{font-size:.84rem;line-height:2.05;color:#394338;margin:0;padding:0 12px 21px 0;
+    animation:fade-in .35s ease}
+  .footer-line{text-align:center;font-family:var(--serif);font-size:1.32rem;font-style:italic;
+    color:#74816a;line-height:1.35;margin:25px 0 0}
+  .bow-actions{text-align:center;margin:31px 0 0}
+  .gilded-button{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;
+    min-height:49px;padding:15px 29px;border:1px solid #a97c37;border-radius:2px;
+    background:linear-gradient(145deg,#f7dda1,#cda45e 48%,#a87936 100%);
+    color:#2d2819;font-family:var(--caps);font-size:.76rem;font-weight:600;letter-spacing:.1em;
+    text-transform:uppercase;box-shadow:inset 0 1px 1px #fff6,0 4px 17px #0003;
+    transition:transform .22s ease,box-shadow .22s ease,filter .22s ease}
+  .gilded-button::before{content:"";position:absolute;inset:4px;border:1px solid #ffefbf74;pointer-events:none}
+  .gilded-button:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 8px 22px #0004}
+  .gilded-button:active{transform:translateY(0)}
+  .finale{display:none;text-align:center;margin-top:33px;padding:40px clamp(15px,5vw,37px) 36px;
+    border:1px solid #bd9958;outline:1px solid #c9ad76;outline-offset:-9px;
+    background:radial-gradient(ellipse at 50% 0,#fffaf0,#f1e4c8);box-shadow:0 10px 40px #533f1b15}
+  .finale.show{display:block;animation:finale-in .85s ease both}
+  .finale__eyebrow{font-family:var(--caps);font-size:.64rem;letter-spacing:.28em;color:#9b783c;margin:0 0 19px}
+  .finale h3{font-family:var(--serif);font-size:clamp(2.2rem,6.2vw,3.4rem);font-weight:500;
+    color:#1b4932;line-height:1.05;margin:0 0 18px;text-wrap:balance}
+  .finale p{font-family:var(--serif);font-size:clamp(1.24rem,3vw,1.5rem);line-height:1.6;
+    color:#465849;margin:0;white-space:pre-line}
+  .encore{display:block;margin:36px auto 0;background:none;color:#d4bb80;border:0;
+    font-family:var(--caps);font-size:.68rem;letter-spacing:.16em;text-decoration:underline;
+    text-underline-offset:6px;padding:8px 12px}
+  .encore:hover{color:#fff0bb}
+  .theatre-footer{position:relative;z-index:2;text-align:center;color:#b5a77e;
+    padding:0 15px 35px;font-family:var(--serif);font-style:italic;font-size:1.1rem}
+
+  /* The invitation is a physical theater curtain, with weight, highlights and gilt ropes. */
+  .opening{position:fixed;inset:0;z-index:50;overflow:hidden;isolation:isolate;
+    background:transparent}
+  .opening.done{visibility:hidden;pointer-events:none}
+  .opening__glow{position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(ellipse 45% 55% at 50% 42%,#ffe3a142,transparent 76%);
+    opacity:0;transition:opacity 2.5s ease}
+  .opening.is-opening .opening__glow{opacity:1}
+  .curtain{position:absolute;top:0;bottom:-10px;width:51%;z-index:3;will-change:transform;
+    background:
+       linear-gradient(90deg,#0008 0%,transparent 8%,#ffffff16 14%,transparent 24%,#0009 35%,transparent 47%,#ffffff17 54%,transparent 61%,#0009 76%,#ffffff0d 89%,#0008 100%),
+       repeating-linear-gradient(90deg,#071e14 0px,#12472f 19px,#286e49 33px,#164a31 49px,#0a2c1e 70px,#1e6141 86px,#103e2a 106px),
+       linear-gradient(180deg,#266b48,#0a281c);
+    background-size:170px 100%,140px 100%,100% 100%;
+    box-shadow:inset 0 -70px 120px #0008,inset 0 15px 50px #050f0b9e,0 0 45px #0009;
+    transition:transform 3.15s cubic-bezier(.67,.05,.14,1)}
+  .curtain::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(90deg,transparent 0 6%,#ffffff07 7%,transparent 10%,#0003 14%,transparent 18%),
+               linear-gradient(180deg,#ffe7b30f,transparent 25%,#0007 96%)}
+  .curtain::after{content:"";position:absolute;bottom:4px;left:0;right:0;height:18px;
+    background:repeating-linear-gradient(90deg,#b38c49 0 2px,#e2be78 2px 3px,transparent 3px 8px);
+    border-top:3px solid #b99353;box-shadow:0 -4px 12px #0007}
+  .curtain--left{left:0;border-right:4px solid #ac8046;transform-origin:left center}
+  .curtain--right{right:0;border-left:4px solid #ac8046;transform-origin:right center;filter:brightness(.88)}
+  .curtain--left .rope,.curtain--right .rope{position:absolute;top:55%;width:30%;height:94px;pointer-events:none}
+  .curtain--left .rope{left:2%}
+  .curtain--right .rope{right:2%;transform:scaleX(-1)}
+  .rope::before{content:"";position:absolute;top:2px;left:0;width:95%;height:62px;
+    border-bottom:8px ridge #d7ae69;border-radius:0 0 95% 55%;transform:rotate(-7deg);
+    filter:drop-shadow(0 5px 3px #0009)}
+  .rope::after{content:"";position:absolute;right:4%;top:49px;width:17px;height:40px;
+    background:repeating-linear-gradient(90deg,#b38441 0 2px,#f2d58c 2px 4px,#886029 4px 6px);
+    border-radius:5px 5px 45% 45%;box-shadow:0 7px 8px #0008;transform:rotate(-7deg)}
+  .opening.is-opening .curtain--left{transform:translateX(-104%) scaleX(.79)}
+  .opening.is-opening .curtain--right{transform:translateX(104%) scaleX(.79)}
+  .valance{position:absolute;top:0;left:0;width:100%;height:clamp(115px,19vh,218px);z-index:5;
+    pointer-events:none;filter:drop-shadow(0 15px 12px #000a);transition:transform 2.5s ease .15s}
+  .opening.is-opening .valance{transform:translateY(-110%)}
+  .opening__frame{position:absolute;inset:0;z-index:6;pointer-events:none;border:clamp(8px,1.2vw,14px) ridge #a87d42;
+    box-shadow:inset 0 0 0 2px #efcf86,inset 0 0 20px #040c08a8,inset 0 0 80px #0009}
+  .opening__frame::before{content:"";position:absolute;inset:8px;border:1px solid #d1af71a3}
+  .opening.is-opening .opening__frame{animation:frame-away .7s linear 3.15s both}
+  .opening__sparkles{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .opening__sparkles span{position:absolute;width:4px;height:4px;border-radius:50%;background:#ffde96;
+    box-shadow:0 0 14px 2px #f7db8db2;animation:twinkle 3.8s ease-in-out infinite alternate}
+  .opening__sparkles span:nth-child(1){left:18%;top:25%;animation-delay:.3s}
+  .opening__sparkles span:nth-child(2){left:75%;top:17%;animation-delay:1.1s}
+  .opening__sparkles span:nth-child(3){left:88%;top:57%;animation-delay:1.8s}
+  .opening__sparkles span:nth-child(4){left:31%;top:75%;animation-delay:.9s}
+  .opening__sparkles span:nth-child(5){left:59%;top:88%;animation-delay:2.2s}
+  .intro{position:absolute;inset:0;z-index:7;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;padding:clamp(26px,5vw,60px);color:#f9e7ba;
+    background:radial-gradient(ellipse 43% 45% at 50% 48%,#06140dce,#07150b54 77%,transparent 100%);
+    transition:opacity .45s ease,transform .45s ease}
+  .opening.is-opening .intro{opacity:0;transform:scale(1.035);pointer-events:none}
+  .intro__pre{font-family:var(--caps);font-size:clamp(.62rem,1.6vw,.8rem);letter-spacing:.29em;
+    color:#e6c78a;text-transform:uppercase;line-height:1.9;margin:0 0 22px}
+  .intro__tiny-star{font-size:30px;color:#ebd297;line-height:1;margin-bottom:17px;
+    text-shadow:0 0 28px #ffd28f66}
+  .intro__name{font-family:var(--serif);font-weight:500;font-size:clamp(3.7rem,11vw,7rem);
+    line-height:.95;letter-spacing:-.04em;margin:0 0 15px;text-wrap:balance;
+    text-shadow:0 3px 14px #000c,0 0 43px #f9d28a3a;overflow-wrap:break-word}
+  .intro__subtitle{font-family:var(--caps);text-transform:uppercase;font-size:clamp(.74rem,2vw,.98rem);
+    line-height:1.9;letter-spacing:.14em;margin:0 0 17px;max-width:500px}
+  .intro__subline{font-family:var(--serif);font-style:italic;font-size:clamp(1.05rem,3vw,1.35rem);
+    color:#efdfb9;margin:0 0 33px}
+  .intro .gilded-button{min-width:225px}
+  .intro__bottom{position:absolute;bottom:7%;left:15px;right:15px;color:#d6b978;
+    font-family:var(--caps);font-size:.64rem;letter-spacing:.3em;opacity:.88}
+
+  @keyframes fade-in{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes finale-in{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @keyframes twinkle{0%,40%{opacity:.06;transform:scale(.6)}100%{opacity:.9;transform:scale(1.4)}}
+  @keyframes frame-away{to{opacity:0}}
+  @media(max-width:600px){
+    .architecture__side{width:10px}.architecture__arch{left:4%;right:4%;top:-180px}
+    .theatre-header{padding-top:43px;padding-bottom:10px}
+    .program-wrap{padding:17px 19px 58px}
+    .playbill{padding:74px 28px 53px}
+    .playbill::before{inset:8px}.playbill::after{inset:14px}
+    .paper-grain{inset:15px}
+    .ornament-corner{width:43px;height:43px}
+    .ornament-corner.tl{top:15px;left:15px}.ornament-corner.tr{top:15px;right:15px}
+    .ornament-corner.bl{bottom:15px;left:15px}.ornament-corner.br{bottom:15px;right:15px}
+    .seal{width:87px;height:87px}.seal svg{height:54px;width:54px}
+    .cast li{font-size:.72rem;gap:6px;margin:13px 0}
+    .cast-icon{flex-basis:27px;width:27px;height:27px}
+    .cast .cast-role{max-width:52%}
+    .spark-divider{margin:25px auto}
+    .intro__bottom{bottom:6%}
+  }
+  @media(max-width:380px){
+    .program-wrap{padding-left:13px;padding-right:13px}
+    .playbill{padding-left:23px;padding-right:23px}
+    .intro__name{font-size:3.25rem}
+    .intro__pre{letter-spacing:.2em}
+    .cast li{font-size:.6rem}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  }
+</style>
+</head>
+<body class="locked">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="corner" viewBox="0 0 85 85">
+      <path d="M5 75V16Q5 5 16 5H75" fill="none" stroke="currentColor" stroke-width="1.1"/>
+      <path d="M12 61V25Q12 12 25 12H61" fill="none" stroke="currentColor" stroke-width=".7"/>
+      <path d="M5 32C17 31 24 23 25 5M5 46C22 42 37 27 38 5" stroke="currentColor" stroke-width="1" fill="none"/>
+      <path d="M13 20Q27 19 30 31Q21 28 13 20ZM20 13Q19 27 31 30Q28 21 20 13Z" fill="currentColor" opacity=".8"/>
+      <circle cx="7" cy="7" r="3" fill="currentColor"/>
+      <path d="M44 7l4 4-4 4-4-4zM7 44l4 4-4 4-4-4z" fill="currentColor" opacity=".7"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- Opening night: everything is drawn in CSS/SVG, with no required image assets. -->
+<div class="opening" id="opening" role="dialog" aria-modal="true" aria-labelledby="introName">
+  <div class="opening__glow" aria-hidden="true"></div>
+  <div class="opening__sparkles" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="curtain curtain--left" aria-hidden="true"><div class="rope"></div></div>
+  <div class="curtain curtain--right" aria-hidden="true"><div class="rope"></div></div>
+  <svg class="valance" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="valanceVelvet" x1="0" x2="0" y1="0" y2="1">
+        <stop stop-color="#071f15"/><stop offset=".24" stop-color="#28694a"/>
+        <stop offset=".6" stop-color="#12402d"/><stop offset="1" stop-color="#061b12"/>
+      </linearGradient>
+      <linearGradient id="gilt" x1="0" x2="1"><stop stop-color="#8a5c25"/><stop offset=".32" stop-color="#f2d88e"/><stop offset=".63" stop-color="#b68a45"/><stop offset="1" stop-color="#e9c681"/></linearGradient>
+      <pattern id="valanceFolds" width="65" height="190" patternUnits="userSpaceOnUse"><rect width="65" height="190" fill="none"/><path d="M0 0V190" stroke="#000" stroke-opacity=".4" stroke-width="18"/><path d="M40 0V190" stroke="#fff" stroke-opacity=".09" stroke-width="10"/></pattern>
+    </defs>
+    <path d="M0 0H1200V122 Q1125 206 1050 129 Q975 205 900 129 Q825 205 750 129 Q675 205 600 129 Q525 205 450 129 Q375 205 300 129 Q225 205 150 129 Q75 205 0 122Z" fill="url(#valanceVelvet)" stroke="#b28a48" stroke-width="6"/>
+    <path d="M0 0H1200V122 Q1125 206 1050 129 Q975 205 900 129 Q825 205 750 129 Q675 205 600 129 Q525 205 450 129 Q375 205 300 129 Q225 205 150 129 Q75 205 0 122Z" fill="url(#valanceFolds)"/>
+    <path d="M0 118Q75 201 150 129Q225 201 300 129Q375 201 450 129Q525 201 600 129Q675 201 750 129Q825 201 900 129Q975 201 1050 129Q1125 201 1200 118" fill="none" stroke="url(#gilt)" stroke-width="7"/>
+    <path d="M0 17H1200M0 30H1200" stroke="url(#gilt)" stroke-width="5"/>
+    <g fill="url(#gilt)"><circle cx="150" cy="129" r="8"/><circle cx="300" cy="129" r="8"/><circle cx="450" cy="129" r="8"/><circle cx="600" cy="129" r="8"/><circle cx="750" cy="129" r="8"/><circle cx="900" cy="129" r="8"/><circle cx="1050" cy="129" r="8"/></g>
+    <g stroke="url(#gilt)" stroke-width="4" stroke-linecap="round">
+      <path d="M150 135v29M300 135v29M450 135v29M600 135v29M750 135v29M900 135v29M1050 135v29"/>
+    </g>
+    <g fill="url(#gilt)"><path d="M141 161h18l-4 26h-10zM291 161h18l-4 26h-10zM441 161h18l-4 26h-10zM591 161h18l-4 26h-10zM741 161h18l-4 26h-10zM891 161h18l-4 26h-10zM1041 161h18l-4 26h-10z"/></g>
+  </svg>
+  <div class="opening__frame" aria-hidden="true"></div>
+  <div class="intro" id="intro">
+    <p class="intro__pre">An invitation to a private performance</p>
+    <div class="intro__tiny-star" aria-hidden="true">✦</div>
+    <h1 class="intro__name" id="introName">A Birthday Musical</h1>
+    <p class="intro__subtitle">A Birthday Musical in Four Acts</p>
+    <p class="intro__subline">A little something, just for you</p>
+    <button class="gilded-button" id="openButton" type="button">✧ &nbsp; Raise the curtain &nbsp; ✧</button>
+    <p class="intro__bottom">One star. One story. One unforgettable night.</p>
+  </div>
+</div>
+
+<div class="theatre" id="theatre" inert>
+  <div class="architecture" aria-hidden="true">
+    <div class="architecture__side left"></div><div class="architecture__side right"></div>
+    <div class="architecture__arch"></div><div class="house-lights"></div>
+  </div>
+  <header class="theatre-header" aria-label="Theater heading">
+    <p class="theatre-header__eyebrow">A Private Performance · One Night Only</p>
+    <div class="theatre-header__line" aria-hidden="true"><span>✦</span></div>
+  </header>
+  <main class="program-wrap" id="main">
+    <article class="playbill" aria-label="Birthday musical program">
+      <div class="paper-grain" aria-hidden="true"></div>
+      <svg class="ornament-corner tl" aria-hidden="true"><use href="#corner"></use></svg>
+      <svg class="ornament-corner tr" aria-hidden="true"><use href="#corner"></use></svg>
+      <svg class="ornament-corner bl" aria-hidden="true"><use href="#corner"></use></svg>
+      <svg class="ornament-corner br" aria-hidden="true"><use href="#corner"></use></svg>
+      <div class="seal" aria-label="Ladybug, for good luck">
+        <svg viewBox="0 0 80 80" role="img" aria-label="Red ladybug emblem">
+          <path d="M31 19L24 8M49 19L56 8" fill="none" stroke="#263025" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="40" cy="25" r="12" fill="#253026"/>
+          <ellipse cx="40" cy="46" rx="25" ry="26" fill="#98281d" stroke="#2a3023" stroke-width="2"/>
+          <path d="M40 20V70" stroke="#20271e" stroke-width="2.5"/>
+          <circle cx="28" cy="38" r="4.7" fill="#1e211b"/><circle cx="52" cy="38" r="4.7" fill="#1e211b"/>
+          <circle cx="27" cy="54" r="4.3" fill="#1e211b"/><circle cx="53" cy="54" r="4.3" fill="#1e211b"/>
+          <path d="M21 42Q24 27 33 26" stroke="#ffb2a174" stroke-width="4" stroke-linecap="round" fill="none"/>
+        </svg>
+      </div>
+      <p class="playbill__eyebrow" id="top"></p>
+      <h2 class="name" id="title"></h2>
+      <p class="subtitle" id="subtitle"></p>
+      <div class="spark-divider" aria-hidden="true"><span class="line"></span><span class="flourish">❧ &nbsp; ✦ &nbsp; ❧</span><span class="line"></span></div>
+      <section aria-labelledby="castHeading">
+        <h3 class="section-title" id="castHeading">The Cast</h3>
+        <ul class="cast" id="cast"></ul>
+      </section>
+      <div class="spark-divider" aria-hidden="true"><span class="line"></span><span class="flourish">✦</span><span class="line"></span></div>
+      <p class="interlude" id="place"></p>
+      <div class="spark-divider" aria-hidden="true"><span class="line"></span><span class="flourish">❦</span><span class="line"></span></div>
+      <section aria-labelledby="programHeading">
+        <h3 class="section-title" id="programHeading">Tonight's Program</h3>
+        <div class="program-list" id="acts"></div>
+      </section>
+      <p class="footer-line" id="foot"></p>
+      <div class="spark-divider" aria-hidden="true"><span class="line"></span><span class="flourish">✧</span><span class="line"></span></div>
+      <div class="bow-actions"><button type="button" class="gilded-button" id="bowButton">✦ &nbsp; Take a bow &nbsp; ✦</button></div>
+      <section class="finale" id="finale" aria-live="polite" aria-labelledby="finaleTitle">
+        <p class="finale__eyebrow">A Standing Ovation · Just For You</p>
+        <h3 id="finaleTitle"></h3>
+        <p id="finaleMessage"></p>
+        <div class="spark-divider" aria-hidden="true"><span class="line"></span><span class="flourish">✦</span><span class="line"></span></div>
+      </section>
+    </article>
+    <button class="encore" type="button" id="encoreButton">↺ &nbsp; Experience the opening again</button>
+  </main>
+  <footer class="theatre-footer">The finest stories are the ones we get to share. ✦</footer>
+</div>
+
+<script>
+/* ========================================================================
+   
+   ======================================================================== */
+const SHOW = {
+  her: "Birthday Week!",
+  you: "King",
+  top: "Preview performance, before opening night",
+  subtitle: "A Birthday Musical in Four Acts",
+  place: "Place: wherever you are. Time: a little early, because I couldn’t wait.",
+  cast: [
+     ["Brooke Mason", "The Star", "star"],
+    ["Ladybugs", "Cause why not", "ladybug"],
+    ["Smiski", "Brooke's cute little helpers", "data:image/png;base64,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"],
+    ["Miffy", "Professional Cuddler", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAABYCAYAAACKwsXrAAAYw0lEQVR42s1baXhURdZ+q+69vSXdSchCgLApa9jXEAgEiBEExw/BMDCo4IajOAruMyyB8cGFGWQ+RkDmG8WFGZWArOKgOCSIIii7hDXsgRCSkKS709333qrz/ejuGCAJQdGZ8zz9dNLdt+q9p946Veetc4EGGBGx0LvtlVdeeapHt25b0/qmnBs7eszZFf/4x4uccwDgaLgxALDarCCihHVb1sURUczV/f0kCzWiEJHtqSee+GjY8GG04M/z6d+ffU6z/jCdUnv3pYXz5z+hqipWrFihNKBJRVVVbNqwIeX2obctTe3X70L3Lt0u9u3Vq+CxRx99i4gibwr4rKwsRdM0zHrhhZy7MjPp1JlTOhEJIpJEJHJW5oiB/Qfo+3ft6goA2dnZdXp+8uTJGuccC+b9+bFB/frrT/72cVq76mM68n0+bfnscxp5eybdc8/d+4ioRXZ2Nq+vrXot7MGNa9ZMSE9NpQN7dhtERAE9QMI0KRAIEBGZM/8wncaNztpBRFqYBnW1tWrFirt6du4q/+/NpZKIjJADJBHJS0UX/EOHpNO8ea++GHKC+mMpwogo8u477jj60uxZkoiEYQRC/RAJIYiI5MnjBbJ/nxR9165dbWob5pDnGBF1TB+QVjL18SdCbRlkGiZJISgQ8BERifmvvSqGZ2TsIiJbffOmzi9ycnI4AHpv+Xtj3W5P20cemSwkEedcASh0MeeQUrJWt94iunTtojw79em7AWDw4MFKLY7g05588i1VVWPnvT5fCiG4oihQVAXgHIqqAQAbMWIkN/z+Lsf2748DIG+Y61lZWQpXFPxqeObfJowfJ4nICHn4CjNNk4jI/L+lb1Jy61tWWywWAKgGTiFv79i2LbVLcseqbdvyTCKSoeuqTYrgKHo9HnP0iDvkkkWL7q9JsQZ5nIhYTk6OEKYZU+X13DVo0CAGQJFSXhvXGAMAnpraj+Li4zIO79nTEoAIe2psfj5jnNOcOXPuGzRwoH3AgEEkhMkURbmmHUEER0QEJcQnsPz8/FsA4ODBg7V6XK2HJmLvd99044rSOG3gQBlkBq8FOAcA1r5DBxkdHe2YMHFiIwCnZ8+ezYgIjDFJRG0HpqTcf/eYMRQcDap1lKWUUBQFjRMT8f3Ro9FgDLm5uQ3n+KJFixgArFm9trvL6UKHjh1lDe9eBRwQwoSqWWVyp05KbGzsSMYY8vPz2dixYzkAujMzs6MrKipi4MCBEiDGuVL3qgQwp8sJVVE62KxW5OXlyRuanACQt/XLpnFxjcG5AillrcBD1AIA1rl7V0iSaRaLBTk5OcjJySEiUgO6+UxKan9YbHaYQoIYrx11sB3Yo2Pg8/riVFUF6hieWoEnJCSQqqooOF4Q06Jli5rgavdU6IaaNG0GXTda+v1+S6hDCSDR56vqk5qael1Hhdux22zweDyyvj55HRyXVqsV7dq369GsWRLqWlSu6pAlNE4ASZkAIDrsqenPvtgjMtJp79O3rwmA1TZPrra4+Hjouk5CCNxwHBdCoLKyUkRGRl5/xxQGHp8ATdNcHy5bZg0DP1d4tndSUjNEN4qpl25XgOIcCueqz+e78QWIMQZVVZX6huvqaeV0OaXdYcHZopNJAGCz2eD1VvS6tW1rBFdOCVZHpzVmIPN5vGia1KwlgJggS69dhHg9bgRj3HP5clmDPW53OGRso0aqkEgEAFXVcObs6RadO3cO3V393g65iCoqKnD+fOH3ERERpQA4Y4waBDw9PV3x+3w4nJ//3aVLJXXO7GsjCwcYw5bNuRwAjh070NpisbRp3LhxXdH06kYAAAG/H06XSwtdQDdEFSJC7969ZcHx42hIr2FKMTDY7db2APDG/Dd4IKBb4xISrozU9Y8cFRaeR4Q94nQgEEBWVhZvMPApCQkEAJ26dS4ovnQBhh4A57zekBj+xumMhCMiMg4AEls2axMTEwuXM0oGcdUNnNdo2u/3wtkoutA0TRQXF7MGAz+YnEwA0KNrj71lpaXmxaIifr1YHh5mp9OJiAiHEwCO5B9Nstvt3OWKkg3YSEPhCiCByopy9OjWrTy002x4VJk9ezYBwH0PPnjWarMH8g8d4qHZfd3uLVYrCgsvSAA4efK4abPZYbHbr0u34NoLKi8vU86ePevbt3Pn+yEsosHAQ7OYAyixatqRg99/j+sBpxBZ7HY7Dh/OZwBw8WKxcDjsaMjsJhn8xakTJ5iuG7T0vfd89cb6ur5IT0/njDG9ZZu2Xxw9coQASM557QgIQCjURka4oDKFERHr2LFj7+jYRiFg8jqTWwCA3LNvL6wOewGAirpCYb3Ap0yZQgBw95isvZcuXmSlFy+y601QAHBERMDv8emMMfJ5qmJtIZrUfx0htO+i3Xt243JFxRLGmJ6VlcVu2ONZWVkSABs2bNjm0tKSU7v37OYApKR6Pcc9bg+Su3XtQ0SRCXFx8TDldeMgEcC5hrLSEnb69Gk89tijB0MYbpwqYZ5zhRc3ionZ82VeHrtyZa69PYfDju8Pft/n3nG/PrZh7bqhnsrKK1K5uhIIAPTltq2KrgeKJ0586FAN56HBGVC1pJCVhYPJyaq7tPSjPXv2jqryeLgjMhJEMpz5VK8rihL8f9SYexDVKJYISOzcuQtuy8wM3hHj19vqyNzN/1ZaNEnao2napRC/GxBGr7Ls7GyeHroxIkrq3bWLd+2aj2UwQTaoNpNSXvEvNcDC15w5c8q8IyNDLl+69L709HT1R2kqWVlZCgBYrVZkjRlzb7+ePQ/07dFdbv9qmySSJIRZLxDTNMgwgq/alIFaVAJ6Y9FC0T05uYqI0qxWK9atW+e4ISUrfKfbt3yZNjg1bdPIzGH03ttvU2lxsQy60WyoM6mhHpdS0omTBXL0nSPloJQUz8I3/jIz0um8won1Wnp6ugoAS5YsuXvwoHT/q3NfJr/PZ4a0QpJS3FTQ17BKSnpz0SLq3bsnTcjK+pyIkq8LPiy8rFu5elRaWpr44MMPKKTtkWmaV/P35kMPeZ6IZEFBgTF21Ci6c9jtnnOnTt1ZpzAU5lJZWVmLtL79PO++844kIqHr+s8O+GrwhlE98Y2HHpxEA1JTjIN796ZcA56IWFZWlkJEUXfclrnrualPExGZuq7Tf8qEEGTKoLQ3+cEHaPjgwYVE5LpCxg5Pxmeeeuq5kcOHU2V5hS6ECPGZ/oPgg/QM+H3msKEZ9D8jRiwnImt2djYP56DMXVbWZcjA/sUbNqwNCZIG/TdYOFTu3rPH6NmlCy1duHBUtbOJiL3yxz/+dXzWPUTCNMJ3+t9iIc7LOTNmmCMybzsbogzjANSteXlDhmZkELjCiUSDtI9fyhRFARGxqdOmQdf1pD+9+updAIjv2Lojye32JA0dmsGCeysF/03GGIOUEq5GjTB4yBB8tmnTo0RkVSKd9gkMbPRDj0yWjHPOOMd/pzEeGxNN6z5endi1Z9d/83Onz6Qnd+oErin1anX/SQvqjRKdunSRTZo2tb677N2x3F1V1at58+Y3esD6i5spTIAraN++PbZv366pmsJbxSXEX1+t+ZmNahf5r5H5Wt3SGjEx0am8yu3mzihXiEWsVoVKCHHdXPNmABdSBvPuWnMNBQB4fON4QBjJalVVFVktFlbfrL76oOln4XE1l+vUYIMqQmQkLl+uULnL5WSVHvc1mXj47wsXLmDWrFk4ceJEA7L1H1UrAABwV1Zi17ff4noijKZpMEwD3Ga3B8rLLteVwGLhwoV46aWX8NZbb13x+c0G/trLryAtLQ2rPloBsODBQm2/83qr4IyMJK4zfqC0uCSordfiTWcoEwm//1xWcPw4/LqOwnOFddxg0GFFRRfhsDuZGggENhYUFPQCQDUz97D487vf/Q7JyckYMmRIjZh6823qM8+gcWIixt87AaDa+iEAILfbzYQQp9QxY8aU5n62mfm8Vcwe4bjmBMzpdGLUqFHXfH5zFxcgJbUfUlL7VWO8tp+gdn7pUjFzuVwH+JQpU9YXFV0o+3bHDgaAauPWLxEOpZQ/9MNq32wBwKFDhyi+cfx+brPZTjZp3mzXmvVrQkqVrDUc/tw7Rs55nf0EAwLDgb172IWiIvb09BfX8kAggIzM2//w1VdfGUePHmacqzc9cvzk0QjVBCx/7z3YrPZ17W9pvw9ExFwuF+6dMO7QQw9Oqi6A+ak5483OgrZv2yYyBg6kr3Nzu9SUJdjRo/mZt2UMoU83fmIQkTQM/Sd3aNajeN0I6POFhcaAvn1p+ovPLyMirVpnycrKUhhjmDVr1kspKSl04kSBEUybAjXqxhoi60i6XF5O+/bvq/6syuf9UYm3bgYd5/dV6aNHjqQHJk06QUSWsDJRPQezs7NtDocDDz/88DuZmRl0YP8+g4ikEEa9WuHV4uWFCxeob+/e9PQTT9CzTz1Js6f/oTZBtCHairxUXKyPHH473TV8+CEi6hg8nSZ+ddhTli1bZiMi/vvnn/1nSq8e9O7bbxERmeGkVZjmdXm9b99+6ti+HfXs3IlcNiv9ffHiBvFeSknmD3NLbt+2jYYMSqN7fzNuJxG1Dcne9e72uNVqw5KFf3liyIABlQ9MmEAH9u2VNYqnyDBNMk0RrKOSweo7GXq/WHyRdu7cQZIkrfp4Jc3702skSdbCNklSChLCpJr1WV6vR86aMYN6dEqWM55/fgURKXVKcFd5noVEdVDA3eWh+yasbHtrS/nM00/KQ/v3klELsw1DJ1M3KGAY1QD1GrzWhU6mYZBp6GQaATIMf1ipqja3200ffvCu7Nw9Td5z18jL69e/PzBUaMMaLDeHy1JVTcNzL/z+7dvbtKS2URZxa2IkPXzXCJo552VavelTOnb2LPn9VT86aly6XElbt35DL/1xDqX27kq9ohR5b7NIed9vxpVX06MOT7PaQDPGGBFZZk6bsm7nmg8yZ/aOl0I1+OQtJbijsRVRCrC71IcKexRYTBMkNm+FVs1bIqlFa8QmNkWzVs2R2CgWCOjwSRN+00S5uwLlpWU4f+YcCgqO4+Tx4/CcOII4vRSNooB/nfJhbkpbjG4jaM6WU+x0h4zy5R+v7GtltuNjs7J4Tk6OqBM4EbHBgwcrubm5Yu7cVzd9/c6CzFk9bGYHl1Q5ebGy0ImlByows68FtzV3obzEhwOlBvZ5qnDBrcMfUHBZqNjvlXDanUi0W7DnYhFaRMchnusQVZWI1RQkOCPQJkpF36YqKiPj8L/bL6KDi/B8R44yUhClueTc7YX8YNv0wxtWr+3OGDOJSNY882RXa+Tjxv1azH19wTObly3+86ymbqNnU6aVGgSHAWgRGjZcZHj9u3L0bOTCI21taBfH4bQSoJmoMuz46Jgfi/IvoYVmQcfGCg6WmVCFhuz+CWjv8sEBHeAMJT6BDaeteDf/HIYmxeG3XawQAQ8kOFTOAaaK333jVoxet//tk49WPaqbBq956sdqauRz5syRa3J39nj92cm7x0WfM+9vHaNU+txMVzWo0CGFAbslCmd8Av/IL8XXJRoiVBWJGoNVUXDCq8Nu4TACAv0fnQbV78Wp9W8hWlOwu9CDJpF22KyAKU2cCRhQFI7H28Qio5mAL2CAmAIGAhFg1Sw44jXNucfs6uCpMx9/YeLEJffcc48Spkz4VI2NHTuWEVFi1qg7/57sO4MJPSK511fBSLEhOiDgVzkCGoeuV+IWJQKz+sSiMODF4VIVF8ssuMC9SG8lkNmiJZ777BC6pqaACTsOvf86/vo/LbHrgobviiV0A4jXbOjojECnRoBu88LnkwDjYKEcn0GFTyf0jjKUdGuV/GbNijeklBsZY2fCDg7N2Fx18eKNwmf1Puze8eUD0zsopo1UxeQ6GKkwOcBB0IQFxFXojCB0Diez4NYohq4JEv2bMHRw2MBFAM5GCpa/sxb71n+ISd0TEKtIxFsJ/eM09EkgdIj1wxXlQQVMWKs4AtZgls/CJGASnAn4DIX1SLCIL3afVg5UiJivtuauiYuL4/n5+cRCd0Brt+9PmPfUxG9/G3Wu6ZgWGivXLdxUFdhNN3TYQNyAJhQQA0wuwQhQJCCZCYKAlJEgpsDCq8BUCwwR1EgsigIW8MBUNAgmwEgBEwqEQuAMsAhAVwBWI3+QTEKBDZohwCID9OkRiXdkN9/nWze3Yoxdys7O5jwkaVDB9k3pMbq3ea8kJ3QiTjKAN3d7ccxvhZ0RGAUBSybBQ50IDoBpYMwGRdGh8ioIcJiGAYUkVJIwDR2GGiwFV8gCDg6mENRQVZDBUd1eeNppRAiA4FEdCAQ4S0mKlI6Ko47pf5z9awDIzc3lvFOnTgQAYyfef86tRPqmrjvDThpOkjYntl3yQzIC4wEQOGrNAqu1p2BhXkirri7zZIyBVad9dN2FRJBEhEXD+mOV+OcxH1xgaGnX0TcKlL99x3giUvLy8qS6aNEipigKFs9f8GBMk8b25Ntnmo+/PV/tFmuHxQo004AAKaGJc4PC8I8Rk8EAzlCMSJytdCPCFYF8dxTfV3yenVML2wKwAqjieXl5wjRN1/bcvGGPPjgJc1+exRd8kof8Jj1hESYcFg6T+C+qiApJaG0JoEjneOGbAO5be5KVxrcjW5TT8eGHH8aGJTvatGlTa5vdkdgnNZ10XecpvbpjytTH4ZAGLCqB0S+rm0tJSHBacaTUwKmEVLy0fBW+yPta9uzWNWLjhnWTOedBTXzYsGGFfp/P/69PNwqLxSIBoOj0SURqgMaUX1yBZgyQJJDU+hZ8tOZjjBgxHOCcmjVrRlU+XwfOOXgofysbN378mjeXLFb/8pcFvKykhC6cOgmXTQMjIFwURL8QapIEp1VAiABEcI6LIwcPiI0bN7L27Tp8YZom1BUrVkjGGIjoEQBly5YvH79h/SfxZwsO44nmrqBmzQUU4mDEYCgEAgOnmzcKDACXDLoSjOFM6ojlKkSVB4sXzOdedyU2frFF6dGz1465r7yyXLNag0p+CHh4h+hc/9lnaS/PnPn+BPuF6Ic6MH7JG2BQ7VDJACczWCB4k09eGAiq4DAYh9CACtOG8ZtLTC26SX6fbl0v98zI/Hzyww++wRirIKIfZKPQPpwDEIqi4IHJj2+u/PfqjNn91EBrzW8pDwRYQGGwighwAkxuBkPXTdGaGRgBQjGgcYYYm1Msyffwd4us+q7Dp5Kio6NLKioqauL8IWMO7XXFihUrlLS0NPW1eS8/Ra26bZmx02/9pNBkitUp4hULaSAYoR2cpCABKVTJFt4i0VVRP/j9D4uSBEFQMHqAJDgnaDYVEYodZ3xWMWvnReXTChcbNWHCa5zzkoqKCjU7O1sNg65zjQjvwIio0WNPPjev4OvNE1roJbb0WIG+LWxIsAhYwWCShCQBQSGwQoBIBP9mPAiZgufXTCEopEAhFQpj4JqAUKwIEMdlr4n9ZcCXZy7TCVsiU5M6H+7VZ+C0Gb9/clMoG6OrCydZPXlndRXascLLPf/21wXTj+/aPlw/vou3a8Rs0VxH6wgbWthUOB0E1SJgt1hg1TgUCWjEARZSYQnwCoLXJJTrAuUeE6VewtHLPhzxSnhsThy/6KWY5m0D899ckp0xIHUxY8wTwkc3vCqHU7m8vDxTU1XohtFx/Ph7V2351+cdh6YPlHrAzUvKzkO4PVANHSQNQApoIKjSBFc0KJzBb0gEVDuY3QbY7WCOCLiaNkGXDt3RpkVbpKamwO8rF1OnPcs7tOu0etm7b42ZOGmitnTpUrOuEtWGFphZALA35r362G1pKfRV3mfV2oLH56Mz54vo2InTtGvPPvrqq22Um5dLm/O20Mo1H1PHrp1p9Sfr6eCRo3T69CnylleS9PvCZV5X1GTt+naHmZGWRis/WPnrBmkpDZGviUi5a+SvvsueNUcSken3hUvz6la3AlVe6tO9GxWeOXONxhgwBemGSaYRIGHo5A8+G2o8/sD94pFJk5ZyzquL22640rNG+JEAHG53efP+fXsxQ9c5YwRIBiGrK5FBRMEXgo/NFJeWQFFUEBEMwwjV0LJQ5Wf48FJBsALbCB59Q2ElJZfc19Po+Q0sbqaqqlWnT5+WmsUiLFar5GrweUxVC740i0oWq0ZWq1VaLBahcUV4KitlhMMhNE2TFosmVFUNvhRVqIoiFEURqqoIq8UmDh/Ox8HD+WzokCHbgeATYD/a44wxCsnQ+pzs7D+tWrlyUUlpKU/ulAybzRY6BmHgHPD5fKyoqAiSwEgy7Pn2WwSqfHh+2jQktmgGh92GyIhIuEMHwkIImKYJzhV4PT7s2r0LqQP6f/H8jBmrQiFZ/KS9fkg757Nnz+Z/nb9g+vvv/D2zuKhYvbVduy4REREO0zTIYtHYqVMnT2qaBZwrl9zeqoNRkZHnfjXizrMnTha0cuuefsePHT9+/vyFEikl45wTSQnGOVwRTsQ2iqNRo0d/9/zMmZsZY97QI5V1evz/ARxfXEz5Ovf9AAAAAElFTkSuQmCC"],
+    ["A Very Patient Ball of Yarn", "Itself", "yarn"],
+    ["Everyone in the world", "The standing ovation", "heart"]
+  ],
+  
+  acts: [
+  {act:"Act I: Overture",tag:"How it all began",
+    body:"On November 7th, 2005, a star was born. They were born with the prettiest eyes and the kindest heart. A voice that could charm snakes and make birds swoon. And the kind of smile that would replay in your head for days. Twenty-one years later, the show is still running."},
+  {act:"Act II: The Plot Thickens",tag:"The moments we keep",
+    body:"On their path to stardom they acquired many skills and talents to impress the world, of course. They learned to crochet and knit, making the finest blankets in all the land. They mastered costume design, making pieces that would upstage a peacock's feathers. Their dancing skills were greater than all of the finest dancers in the monarch's court put together. Their fast reading speed and ability to pick up anything made them one of the most skilled craftspeople in all the land."},
+  {act:"Act III: World's Most Whimsical",tag:"Awards season",
+    body:"They became the most dazzling person in all the land and were able to surmount any challenge along with their trusty sidekick Pumpkin. They won many awards including but not limited to: a lifetime supply of blended strawberry Horizon Red Bull infusions, every Smiski ever made, a house full of Miffy things, and a pet pony."},
+  {act:"Act IV: The Next Number",tag:"Her turn in the spotlight",
+    body:"They sing, they dance, they make things with their own two hands, and they are only getting started. (The narrator steps out of the story for a moment.) You are so talented and I am so proud of the person that you are. You are the kindest, smartest, and most whimsical person I have ever seen in my life. I am so excited to see all of the amazing things that you accomplish."}
+],
+bowTitle: "Happy early birthday, Brooke darling",
+bowMsg: "You mean the whole world to me ... actually, you mean every world, every galaxy, every universe. I am so grateful for you, and so grateful to see all of the amazing things you have accomplished. Thank you for all the love you give me, for making me the happiest person in the world, for making me tasty flatbread and potatoes and green beans, and for listening to all my silly lil jokes. I hope this year brings you all the happiness in the world, abundance in everything you desire, more Smiskis and Miffys than you have ever seen ... and maybe some of the last bugs concert tickets ;)\n\nLove, Roshan"
+  }
+/* ======================================================================== */
+const el = id => document.getElementById(id);
+el('title').textContent = SHOW.her;
+el('introName').textContent = SHOW.her;
+el('top').textContent = SHOW.top;
+el('subtitle').textContent = SHOW.subtitle;
+el('place').textContent = SHOW.place;
+el('foot').textContent = SHOW.foot;
+el('finaleTitle').textContent = SHOW.bowTitle;
+el('finaleMessage').textContent = SHOW.bowMsg;
+document.title = `${SHOW.her}: A Birthday Musical`;
+const ICONS = {
+  star: `<svg viewBox="0 0 32 32"><path d="M16 3l3.9 8.6 9.4 1-7 6.4 2 9.3L16 23.4 7.7 28.3l2-9.3-7-6.4 9.4-1z" fill="#b98a2e"/></svg>`,
+  ladybug: `<svg viewBox="0 0 32 32"><ellipse cx="16" cy="18" rx="11" ry="10.5" fill="#b3261e"/><path d="M16 8v21" stroke="#1a1a1a" stroke-width="1.6"/><circle cx="16" cy="7" r="4.6" fill="#1a1a1a"/><circle cx="11" cy="15" r="2" fill="#1a1a1a"/><circle cx="21" cy="15" r="2" fill="#1a1a1a"/><circle cx="10.5" cy="23" r="1.8" fill="#1a1a1a"/><circle cx="21.5" cy="23" r="1.8" fill="#1a1a1a"/></svg>`,
+  yarn: `<svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="#1d6a45"/><path d="M6 13c6 3 14 3 20 0M5 19c7 3 15 3 22 0M9 7c4 5 10 5 14 0M10 25c4-4 8-4 12 0" stroke="#e8eedc" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".8"/><path d="M26 22c3 2 3 5 0 7" stroke="#1d6a45" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  heart: `<svg viewBox="0 0 32 32"><path d="M16 28S4 20 4 12.5C4 8.4 7 6 10 6c2.5 0 4.6 1.4 6 3.6C17.4 7.4 19.5 6 22 6c3 0 6 2.4 6 6.5C28 20 16 28 16 28z" fill="#b3261e"/></svg>`
+};
+
+const cast = el('cast');
+SHOW.cast.forEach(([name, role, iconKey]) => {
+  const li = document.createElement('li');
+  const n = document.createElement('span');
+  n.className = 'cast-name';
+  n.textContent = name;
+  const dots = document.createElement('span');
+  dots.className = 'cast-dots';
+  dots.setAttribute('aria-hidden', 'true');
+  const r = document.createElement('span');
+  r.className = 'cast-role';
+  r.textContent = role;
+
+  // Supports both named SVG icons and embedded, self-contained PNG images.
+  if (iconKey && (ICONS[iconKey] || /^data:image\/(png|jpeg|webp|gif);base64,/i.test(iconKey))) {
+    const icon = document.createElement('span');
+    icon.className = 'cast-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    if (ICONS[iconKey]) {
+      icon.innerHTML = ICONS[iconKey];  // Locally defined, trusted SVG markup.
+    } else {
+      const img = document.createElement('img');
+      img.src = iconKey;
+      img.alt = '';
+      img.width = 32;
+      img.height = 32;
+      img.decoding = 'async';
+      icon.appendChild(img);
+    }
+    li.appendChild(icon);
+  }
+  li.append(n, dots, r);
+  cast.appendChild(li);
+});
+SHOW.acts.forEach((a,i)=>{
+  const detail=document.createElement('details');detail.open=i===0;
+  const summary=document.createElement('summary');
+  const title=document.createElement('span');title.className='act-title';title.textContent=a.act;
+  const tag=document.createElement('span');tag.className='act-tag';tag.textContent=a.tag;
+  const body=document.createElement('p');body.className='act-body';body.textContent=a.body;
+  summary.append(title,tag);detail.append(summary,body);el('acts').append(detail);
+});
+
+
+const opening = el('opening');
+const openButton = el('openButton');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let openingTimer = null;
+function raiseCurtain(){
+  if(opening.classList.contains('is-opening')) return;
+  openButton.disabled=true;
+  el('theatre').classList.add('lit');
+  opening.classList.add('is-opening');
+  const delay=reducedMotion?30:3200;
+  clearTimeout(openingTimer);
+  openingTimer=setTimeout(()=>{
+    opening.classList.add('done');
+    opening.setAttribute('aria-hidden','true');
+    document.body.classList.remove('locked');
+    el('theatre').removeAttribute('inert');
+    el('title').setAttribute('tabindex','-1');
+    el('title').focus({preventScroll:true});
+  },delay);
+}
+function replayOpening(){
+  clearTimeout(openingTimer);
+  window.scrollTo({top:0,behavior:'instant'});
+  el('theatre').classList.remove('lit');
+  el('theatre').setAttribute('inert','');
+  opening.classList.remove('is-opening','done');
+  opening.removeAttribute('aria-hidden');
+  document.body.classList.add('locked');
+  openButton.disabled=false;
+  openButton.focus({preventScroll:true});
+}
+openButton.addEventListener('click',raiseCurtain);
+el('encoreButton').addEventListener('click',replayOpening);
+el('bowButton').addEventListener('click',()=>{
+  el('finale').classList.add('show');
+  el('bowButton').hidden=true;
+  el('finale').scrollIntoView({behavior:reducedMotion?'instant':'smooth',block:'center'});
+});
+</script>
+</body>
+</html>
